@@ -3,7 +3,8 @@ from psycopg2 import sql
 
 # List of database connection strings
 DATABASE_URLS = [
-    "postgres://lddwokth:mJvHU-ZoB_5_dvqP_43CM_YWeDIWv9Jf@isilo.db.elephantsql.com/lddwokth" #AuthorDB
+    "postgres://lddwokth:mJvHU-ZoB_5_dvqP_43CM_YWeDIWv9Jf@isilo.db.elephantsql.com/lddwokth", #AuthorDB
+    "postgres://hdxwvmpg:GcZMUqM7HoeEYP9cvmxGLR-ufqlqC1Ss@bubble.db.elephantsql.com/hdxwvmpg", #BookDB
 ]
 
 # SQL command to create the "bike" table
@@ -16,16 +17,19 @@ DATABASE_URLS = [
 #""")
 
 
-# SQL command to create the "author" table
+# SQL command to create the "author" and "book" table
 create_table_command = sql.SQL("""
 CREATE TABLE IF NOT EXISTS author (
-    authorid SERIAL PRIMARY KEY,
+    author_id SERIAL PRIMARY KEY,
     author_fn VARCHAR(255) NOT NULL,
     author_ln VARCHAR(255) NOT NULL
-
-)
+);                         
+CREATE TABLE IF NOT EXISTS book (
+    book_id SERIAL PRIMARY KEY,
+    book_name VARCHAR(255) NOT NULL,
+    author_id INTEGER NOT NULL
+);                         
 """)
-
 
 # Function to create table in a given database
 def create_table_in_database(db_url):
