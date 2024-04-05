@@ -4,9 +4,8 @@ from psycopg2 import sql
 # List of database connection strings
 DATABASE_URLS = [
     "postgres://lddwokth:mJvHU-ZoB_5_dvqP_43CM_YWeDIWv9Jf@isilo.db.elephantsql.com/lddwokth", #AuthorDB
-    "postgres://hdxwvmpg:GcZMUqM7HoeEYP9cvmxGLR-ufqlqC1Ss@bubble.db.elephantsql.com/hdxwvmpg", #BookDB
+    "postgres://hdxwvmpg:GcZMUqM7HoeEYP9cvmxGLR-ufqlqC1Ss@bubble.db.elephantsql.com/hdxwvmpg" #BookDB
 ]
-
 
 # SQL command to create the "author" and "book" table
 create_table_command = sql.SQL("""
@@ -14,11 +13,13 @@ CREATE TABLE IF NOT EXISTS author (
     author_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     author_fn VARCHAR(255) NOT NULL,
     author_ln VARCHAR(255) NOT NULL
-);                         
+);                        
+                               
 CREATE TABLE IF NOT EXISTS book (
     book_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     book_name VARCHAR(255) NOT NULL,
-    author_id INTEGER NOT NULL
+    author_id INTEGER NOT NULL,
+    book_summary TEXT NOT NULL
 );                         
 """)
 
@@ -34,7 +35,7 @@ def create_table_in_database(db_url):
         
         # Commit the changes
         conn.commit()
-        
+
         print("Tables 'author' and 'book' created successfully in database:", db_url)
         
     except psycopg2.DatabaseError as e:
