@@ -3,19 +3,29 @@ from psycopg2 import sql
 
 # List of database connection strings
 DATABASE_URLS = [
-    "postgres://pbcusqgz:glJ53RAC-vj2evae_dZVSPnQqI8e_Nui@bubble.db.elephantsql.com/pbcusqgz",
-    "postgres://hzypcrnd:5jE78MKpt6885VDIbxRkuI0aBteqqpey@bubble.db.elephantsql.com/hzypcrnd",
-    "postgres://nchemrjv:CRSus5sf-6lyOuVx7987xohUWIymuo34@bubble.db.elephantsql.com/nchemrjv"
+    "postgres://lddwokth:mJvHU-ZoB_5_dvqP_43CM_YWeDIWv9Jf@isilo.db.elephantsql.com/lddwokth" #AuthorDB
 ]
 
 # SQL command to create the "bike" table
+#create_table_command = sql.SQL("""
+#CREATE TABLE IF NOT EXISTS bike (
+#    bike_id SERIAL PRIMARY KEY,
+#    bike_model VARCHAR(255) NOT NULL,
+#    bike_price DECIMAL(10, 2)
+#)
+#""")
+
+
+# SQL command to create the "author" table
 create_table_command = sql.SQL("""
-CREATE TABLE IF NOT EXISTS bike (
-    bike_id SERIAL PRIMARY KEY,
-    bike_model VARCHAR(255) NOT NULL,
-    bike_price DECIMAL(10, 2)
+CREATE TABLE IF NOT EXISTS author (
+    authorid SERIAL PRIMARY KEY,
+    author_fn VARCHAR(255) NOT NULL,
+    author_ln VARCHAR(255) NOT NULL
+
 )
 """)
+
 
 # Function to create table in a given database
 def create_table_in_database(db_url):
