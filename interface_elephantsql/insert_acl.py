@@ -39,11 +39,16 @@ def insert_bike_into_both_databases(bike_data):
             if 'conn' in locals(): conn.close()
 
 bikes_to_insert = [
-    ('Mountain Bike', 500.00),
-    ('Road Bike', 1500.00),
-    ('Hybrid Bike', 800.00),
-    ('Electric Bike', 2500.00),
-    ('Kids Bike', 200.00)
+
+    ('Agatha', 'Christie'),
+    ('Marissa', 'Meyers'),
+    ('John', 'Wick'),
+    ('Bethany', 'Blue'),
+    ('Timothy', 'Goyle'),
+    ('Penelope', 'Kendell'),
+    ('Steven', 'Stevensons'),
+    ('Judy', 'Garland')
+
 ]
 
 for bike in bikes_to_insert:

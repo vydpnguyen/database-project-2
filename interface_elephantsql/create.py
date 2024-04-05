@@ -7,25 +7,16 @@ DATABASE_URLS = [
     "postgres://hdxwvmpg:GcZMUqM7HoeEYP9cvmxGLR-ufqlqC1Ss@bubble.db.elephantsql.com/hdxwvmpg", #BookDB
 ]
 
-# SQL command to create the "bike" table
-#create_table_command = sql.SQL("""
-#CREATE TABLE IF NOT EXISTS bike (
-#    bike_id SERIAL PRIMARY KEY,
-#    bike_model VARCHAR(255) NOT NULL,
-#    bike_price DECIMAL(10, 2)
-#)
-#""")
-
 
 # SQL command to create the "author" and "book" table
 create_table_command = sql.SQL("""
 CREATE TABLE IF NOT EXISTS author (
-    author_id SERIAL PRIMARY KEY,
+    author_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     author_fn VARCHAR(255) NOT NULL,
     author_ln VARCHAR(255) NOT NULL
 );                         
 CREATE TABLE IF NOT EXISTS book (
-    book_id SERIAL PRIMARY KEY,
+    book_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     book_name VARCHAR(255) NOT NULL,
     author_id INTEGER NOT NULL
 );                         
@@ -44,7 +35,7 @@ def create_table_in_database(db_url):
         # Commit the changes
         conn.commit()
         
-        print("Table 'bike' created successfully in database:", db_url)
+        print("Tables 'author' and 'book' created successfully in database:", db_url)
         
     except psycopg2.DatabaseError as e:
         print(f"An error occurred in database {db_url}: {e}")
