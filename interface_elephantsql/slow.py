@@ -31,5 +31,11 @@ slow_query = """
 SELECT book_id, book_name, pgp_sym_decrypt(book_summary::bytea, 'secret') AS decrypted_summary
     FROM book
     WHERE pgp_sym_decrypt(book_summary::bytea, 'secret') ~* '\yas\y'
+
+
+SELECT author_id, author_fn, author_ln, pgp_sym_decrypt(author_biography::bytea, 'hidden') AS decrypted_summary
+    FROM author
+    WHERE pgp_sym_decrypt(author_biography::bytea, 'hidden') ~* '\yas\y'
+
 """
 run_slow_query(DATABASE_URLS["BookDB"], slow_query)

@@ -40,17 +40,18 @@ def insert_author_into_database(author_data):
 
     author_id, author_fn, author_ln, author_biography = author_data
     
-    '''
+    
     # Define the insert command template
     insert_command = """
     INSERT INTO author (author_id, author_fn, author_ln, author_biography) VALUES (%s, %s, %s, pgp_sym_encrypt(%s, 'hidden'));
     """
+    
     '''
-
     insert_command = """
     INSERT INTO author (author_id, author_fn, author_ln, author_biography) VALUES (%s, %s, %s, %s);
     """
-    
+    '''
+
     #for role, database_url in DATABASE_URLS.items():
     database_url = DATABASE_URLS['AuthorDB']
     try:
@@ -58,14 +59,6 @@ def insert_author_into_database(author_data):
         conn = psycopg2.connect(database_url)
         cur = conn.cursor()
             
-        '''
-        # Insert the book into the table, adjusting price visibility based on the role
-        if role == 'AuthorDB':
-            values = ( )
-        else:
-            values = ( )
-        '''
-        
         # Execute the insert command
         cur.execute(insert_command, author_data)
         conn.commit()
@@ -78,7 +71,6 @@ def insert_author_into_database(author_data):
         if 'cur' in locals(): cur.close()
         if 'conn' in locals(): conn.close()
 
-
 '''
 books_to_insert = []
 
@@ -88,9 +80,10 @@ for book in book_file:
     books_to_insert.append(book)
     print('**', book)
 '''
-
+'''
 for book in books_to_insert:
     insert_book_into_database(book)
+'''
 
 for author in authors_to_insert:
     insert_author_into_database(author)
