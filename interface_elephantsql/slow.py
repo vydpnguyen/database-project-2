@@ -28,9 +28,8 @@ def run_slow_query(db_url, slow_query):
 
 # A slow query: Intentionally using inefficient LIKE pattern matching and a cross JOIN which multiplies the number of rows.
 slow_query = """
-SELECT *
+SELECT book_id, book_name, pgp_sym_decrypt(book_summary::bytea, 'secret') AS decrypted_summary
     FROM book
-    WHERE book_name = 'To Kill a Mockingbird'
-    AND author_id = 2
+    WHERE pgp_sym_decrypt(book_summary::bytea, 'secret') LIKE '%a_' 
 """
 run_slow_query(DATABASE_URLS["BookDB"], slow_query)

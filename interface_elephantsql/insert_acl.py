@@ -11,7 +11,6 @@ def insert_book_into_database(book_data):
 
     book_id, book_name, author_id, book_summary = book_data
 
-    
     # Define the insert command template
     insert_command = """
     INSERT INTO book (book_id, book_name, author_id, book_summary) VALUES (%s, %s, %s, pgp_sym_encrypt(%s, 'secret'));
