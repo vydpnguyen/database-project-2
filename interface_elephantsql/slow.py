@@ -30,6 +30,6 @@ def run_slow_query(db_url, slow_query):
 slow_query = """
 SELECT book_id, book_name, pgp_sym_decrypt(book_summary::bytea, 'secret') AS decrypted_summary
     FROM book
-    WHERE pgp_sym_decrypt(book_summary::bytea, 'secret') LIKE '%a_' 
+    WHERE pgp_sym_decrypt(book_summary::bytea, 'secret') ~* '\yas\y'
 """
 run_slow_query(DATABASE_URLS["BookDB"], slow_query)
