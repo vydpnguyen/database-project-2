@@ -41,9 +41,15 @@ def insert_author_into_database(author_data):
 
     author_id, author_fn, author_ln, author_biography = author_data
     
+    '''
     # Define the insert command template
     insert_command = """
     INSERT INTO author (author_id, author_fn, author_ln, author_biography) VALUES (%s, %s, %s, pgp_sym_encrypt(%s, 'hidden'));
+    """
+    '''
+
+    insert_command = """
+    INSERT INTO author (author_id, author_fn, author_ln, author_biography) VALUES (%s, %s, %s, %s);
     """
     
     #for role, database_url in DATABASE_URLS.items():
