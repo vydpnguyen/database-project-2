@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS book (
     book_id INTEGER PRIMARY KEY,
     book_name VARCHAR(255) NOT NULL,
     author_id INTEGER NOT NULL,
-    book_summary TEXT NOT NULL
+    book_summary BYTEA NOT NULL
 );                         
 """)
 
