@@ -45,6 +45,8 @@ def create_table_in_database(db_url):
         if cur: cur.close()
         if conn: conn.close()
 
+        
+
 # Iterate over each database URL and create the table
 for db_url in DATABASE_URLS:
     create_table_in_database(db_url)

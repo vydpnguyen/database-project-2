@@ -1,5 +1,4 @@
 import psycopg2
-import time
 
 DATABASE_URLS = {
     'AuthorDB': "postgres://lddwokth:mJvHU-ZoB_5_dvqP_43CM_YWeDIWv9Jf@isilo.db.elephantsql.com/lddwokth",
