@@ -15,6 +15,15 @@ def insert_book_into_database(book_data):
     insert_command = """
     INSERT INTO book (book_id, book_name, author_id, book_summary) VALUES (%s, %s, %s, pgp_sym_encrypt(%s, 'secret'));
     """
+
+    '''
+    # Define the insert command template
+        insert_command = """
+        INSERT INTO book (book_id, book_name, author_id, book_summary) VALUES (%s, %s, %s, %s);
+        """
+    '''
+    
+    
     
     #for role, database_url in DATABASE_URLS.items():
     database_url = DATABASE_URLS['BookDB']
@@ -39,32 +48,19 @@ def insert_book_into_database(book_data):
 def insert_author_into_database(author_data):
 
     author_id, author_fn, author_ln, author_biography = author_data
-    
-    '''
-    # Define the insert command template
-    insert_command = """
-    INSERT INTO author (author_id, author_fn, author_ln, author_biography) VALUES (%s, %s, %s, pgp_sym_encrypt(%s, 'hidden'));
-    """
-    '''
 
     insert_command = """
     INSERT INTO author (author_id, author_fn, author_ln, author_biography) VALUES (%s, %s, %s, %s);
     """
     
     #for role, database_url in DATABASE_URLS.items():
-    database_url = DATABASE_URLS['AuthorDB']
+    #database_url = DATABASE_URLS['AuthorDB']
+    database_url = DATABASE_URLS['BookDB']
     try:
         # Connect to the database
         conn = psycopg2.connect(database_url)
         cur = conn.cursor()
             
-        '''
-        # Insert the book into the table, adjusting price visibility based on the role
-        if role == 'AuthorDB':
-            values = ( )
-        else:
-            values = ( )
-        '''
         
         # Execute the insert command
         cur.execute(insert_command, author_data)
@@ -79,18 +75,10 @@ def insert_author_into_database(author_data):
         if 'conn' in locals(): conn.close()
 
 
-'''
-books_to_insert = []
-
-book_file = open("book_data.py", "r")
-
-for book in book_file:
-    books_to_insert.append(book)
-    print('**', book)
-'''
-
 for book in books_to_insert:
     insert_book_into_database(book)
 
+'''
 for author in authors_to_insert:
     insert_author_into_database(author)
+'''
