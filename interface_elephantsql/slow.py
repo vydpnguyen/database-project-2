@@ -27,13 +27,51 @@ def run_slow_query(db_url, slow_query):
         if conn: conn.close()
 
 # A slow query: Intentionally using inefficient LIKE pattern matching and a cross JOIN which multiplies the number of rows.
-slow_query = """
-SELECT *, COUNT(*) AS num_books, pgp_sym_decrypt(book_summary, 'secret')
-    FROM book
-    JOIN author ON book.author_id = author.author_id
-    WHERE book_summary LIKE 'L%'
-    GROUP BY book_id, book_name, author.author_id
-    ORDER BY book_name ASC;
+slow_query = """SELECT pgp_sym_decrypt(book_summary::bytea, 'secret') AS description
+FROM book, author
+WHERE pgp_sym_decrypt(book_summary::bytea, 'secret') LIKE '%Lorem%'
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
+AND pgp_sym_decrypt(book_summary::bytea, 'secret') IN (SELECT pgp_sym_decrypt(book_summary::bytea, 'secret'))
 """
 
 run_slow_query(DATABASE_URLS["BookDB"], slow_query)

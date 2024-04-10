@@ -23,8 +23,6 @@ def insert_book_into_database(book_data):
         """
     '''
     
-    
-    
     #for role, database_url in DATABASE_URLS.items():
     database_url = DATABASE_URLS['BookDB']
     try:
@@ -78,7 +76,6 @@ def insert_author_into_database(author_data):
 for book in books_to_insert:
     insert_book_into_database(book)
 
-'''
+
 for author in authors_to_insert:
     insert_author_into_database(author)
-'''
