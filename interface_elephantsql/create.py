@@ -12,7 +12,8 @@ create_table_command = sql.SQL("""
 CREATE TABLE IF NOT EXISTS author (
     author_id INTEGER PRIMARY KEY,
     author_fn VARCHAR(255) NOT NULL,
-    author_ln VARCHAR(255) NOT NULL
+    author_ln VARCHAR(255) NOT NULL, 
+    author_biography BYTEA NOT NULL
 );                        
                                
 CREATE TABLE IF NOT EXISTS book (
