@@ -24,7 +24,7 @@ def insert_book_into_database(book_data):
     '''
     
     #for role, database_url in DATABASE_URLS.items():
-    database_url = DATABASE_URLS['BookDB']
+    database_url = DATABASE_URLS['AuthorDB']
     try:
         # Connect to the database
         conn = psycopg2.connect(database_url)
@@ -52,16 +52,9 @@ def insert_author_into_database(author_data):
     insert_command = """
     INSERT INTO author (author_id, author_fn, author_ln, author_biography) VALUES (%s, %s, %s, pgp_sym_encrypt(%s, 'hidden'));
     """
-    
-    '''
-    insert_command = """
-    INSERT INTO author (author_id, author_fn, author_ln, author_biography) VALUES (%s, %s, %s, %s);
-    """
-    '''
 
     #for role, database_url in DATABASE_URLS.items():
-    #database_url = DATABASE_URLS['AuthorDB']
-    database_url = DATABASE_URLS['BookDB']
+    database_url = DATABASE_URLS['AuthorDB']
     try:
         # Connect to the database
         conn = psycopg2.connect(database_url)
@@ -78,7 +71,6 @@ def insert_author_into_database(author_data):
         # Ensure that the database connection is closed
         if 'cur' in locals(): cur.close()
         if 'conn' in locals(): conn.close()
-
 
 
 for book in books_to_insert:
